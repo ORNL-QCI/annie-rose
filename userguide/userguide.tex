@@ -1,0 +1,188 @@
+\newcommand{\documentTitle}{Usage Guide for the Annie Rose Quantum Networking Framework}
+\newcommand{\documentVersion}{Version 0.1}
+
+\documentclass[letterpaper,twoside=false]{scrbook}
+\usepackage[english]{babel}
+\usepackage{titlesec} % Used to customize chapters, sections, and subsections
+\usepackage{scrpage2} % Used for page header/footers
+\usepackage{hyperref} % Used for urls
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+\pagestyle{scrheadings}
+\addtokomafont{pagenumber}{\oldstylenums}
+\clearscrheadfoot
+\lohead[\documentTitle]{}
+\lehead[\documentTitle]{}
+\rofoot[\center\thepage]{}
+\refoot[\center\thepage]{}
+
+\begin{document}
+\title{\documentTitle}
+\date{\documentVersion}
+\maketitle
+\tableofcontents
+
+\chapter{Preface}
+
+This project aims to provide a platform to simulate heterogeneous computer networks comprised of classical and quantum communication channels. The guiding design principles include software-defined communication using near-real time processing of streaming data, separation of concerns into different networking layers, in addition to object oriented software layers.
+
+After reading this guide you will be familiar with the overall architecture of the network simulator, be able to run basic simulations, and make basic modifications to simulations.
+
+\chapter{Authors and Acknowledgments}
+
+\begin{tabular}{ l l }
+	Travis Humble & humblets@ornl.gov \\
+	Ronald Sadlier & sadlierrj@ornl.gov \\
+	Ryan Prout & proutrc@ornl.gov
+\end{tabular}
+
+%The authors would like to acknowledge 
+
+The numerical simulator implements a modified CHP which was originally written  by Scott Aarsonson. Visit \url{www.scottaaronson.com/chp} for more information.
+
+\chapter{Component Overview}
+
+	\begin{description}
+		\item[mininet] \hfill \\
+		We use \href{www.mininet.org}{mininet} to create virtual networks consisting of nodes and switches.
+		
+		\item[gr-qitkat] \hfill \\
+		GNU Radio is a popular streaming signal processing platform commonly used for software-defined radio. Processing blocks arranged in a flowgraph perform parallel processing. Blocks have been written that interface with the client middleware and client applications. Processing blocks make it easier for applications to send and receive data over the quantum network.
+		
+		\item[armish-fireplace] \hfill \\
+		This package is the client middleware, connecting client applications with either hardware or the quantum simulation backend. 
+		
+		\item[eldispacho] \hfill \\
+		The dispatcher is responsible for the quantum network. Any process on the network that interactions with quantum information must do so through the dispatcher. The result of this constraint is that the entirety of the quantum network state is within the dispatcher. Noise models are computed here, allowing for the possibility of complex noise models involving other actors on the network.
+		
+		\item[dspy] \hfill \\
+		Dspy is the \href{www.wireshark.org}{wireshark} for quantum communications. It allows you to examine the quantum network in detail and allows you to access the internal state of the quantum simulator.
+		
+		\item[sabot] \hfill \\
+		Sabot contains the quantum numerical simulator in addition to components mostly for networking, and lexical analysis. Interactions with Sabot are through a ZMQ socket with messages formatted using JSON. Quantum states are stored here, with the simulation abstracted away from those interacting with the instance. The network state as a whole may not be stored here, but the quantum states of physical systems within the network that have not been measured are stored here. Currently, we use CHP (originally written by Scott Aaronson) as the numerical simulator.
+		
+	\end{description}
+	
+	\section{Component API}
+		\begin{description}
+			\item[gr-qitkat] \hfill \\
+			For details, see \url{gnuradio.org}.
+			
+			\item[armish-fireplace] \hfill \\
+			For details, see the readme.md file for armish-fireplace.
+			
+			\item[eldispacho] \hfill \\
+			For details, see the readme.md file for eldispacho.
+			
+			\item[sabot] \hfill \\
+			For details, see the readme.md file for Sabot.
+		\end{description}
+
+\chapter{Installation}
+	\section{Platforms}
+	
+	All code is written to be run on x$86\_64$ processors, in particular Intel 64. AMD64 has not been tested thoroughly, although some testing of software components on ARMv7-a hardware has yielded positive results.
+
+	\section{Dependencies}
+
+		 We require a compiler supporting most features of C++11 (GCC recommended). Below is an alphabetized list of dependencies for all software components. In addition, not every dependency listed here is a separate installable component. Italic items are installed at the time of download of our software components automatically, so you needn't worry about installing them. The version numbers listed are the version that have been tested and confirmed to work.
+
+		\begin{enumerate}
+			\item Boost (v1.58) - \url{http://boost.org}
+			\item CMake (v3.2) - \url{http://cmake.org}
+			\item \textit{cppzmq} (v4.1)
+			\item Doxygen (v1.8) - \url{http://doxygen.org}
+			\item Git (v2.6) - \url{http://git-scm.com}
+			\item GNU Radio (v3.7) - \url{http://gnuradio.org}
+			\item Mininet (v2.2.1) - \url{http://mininet.org}
+			\item Python 2 (v2.7.8) - \url{http://python.org}
+			\item \textit{RapidJSON} (v1.0.2)
+			\item zmq (v4.1) - \url{http://zeromq.org}
+		\end{enumerate}
+	
+	\section{Environment}
+
+		Our environment consists of a standard mainstream Linux distribution with a Bash shell and the above dependencies installed, along with minor configuration tweaks.
+
+		In order to allow Python code to find gr-qitkat, we need to specify them in path variables.
+		
+		\code{
+			\textasciitilde/.bashrc\\
+			export PATH=\$PATH:/usr/bin \\
+			export LD\_LIBRARY\_PATH=\$LD\_LIBRARY\_PATH:/usr/lib\\
+			export LD\_LIBRARY\_PATH=\$LD\_LIBRARY\_PATH:/usr/local/lib\\
+			export PKG\_CONFIG\_PATH=\$PKG\_CONFIG\_PATH:/usr/local/lib/pkgconfig\\
+			export PYTHONPATH=\$PYTHONPATH:/usr/lib/python2.7/site$-$packages\\
+			export PYTHONPATH=\$PYTHONPATH:/usr/local/lib/python2.7/site$-$packages \\ }
+	
+	\section{Download}
+ 		
+ 		We use Git to manage our source repositories, so to download the software is to clone our repositories onto your local machine. Because of the number of different repositories we have decided to write a script that does this automatically. This script, along with other scripts and documentation, are located within a top-level repository. To get this repository,
+ 		
+ 		\code{
+ 		\$ git clone https://code.ornl.gov/i2o/annie-rose.git}
+ 		
+ 		Run the download script with
+ 		
+ 		\code{
+ 		\$ ./fetch.sh
+ 		}
+ 
+ 	\section{Compilation}
+ 		
+ 		Run the build script with
+ 		
+ 		\code{
+ 		\$ ./build.sh
+ 		}
+ 		
+ 	 	We're using this to utilize unused processor cores. If you receive an error message related to nproc, then you are probably using a rather exotic system, since it is part of GNU coreutils.
+
+	\section{Installation}
+	
+		Run the installation script with
+	
+		\code{
+		\$ sudo ./install.sh
+		}
+
+	\section{Updating}
+	
+		Run the update script with
+		
+		\code{
+		\$ ./update.sh
+		}
+		
+\chapter{Usage Examples}
+	\section{First Launch}
+		Navigate to the annie-rose project folder and take a look inside the /apps directory. Here you'll find various network simulations ready to launch. The first simulation to take a look at is within the folder /apps/firstlaunch. You'll notice a single Python file ``app.py'' along with the folder ``lib''. The lib folder holds any library script required. This simulation consists of two clients, Alice and Bob, connected with a single switch. 
+		
+		Go ahead and run $python app.py$. Immediately you'll notice output on the terminal
+
+ - Building an application
+ - Launching an application (and individual components)
+ 	\section{Launching Example Network}
+ 		description
+
+ 	\section{Launching Individual Components}
+ 		\begin{description}
+		\item[gr-qitkat] \hfill \\
+		Since gr-qitkat is a library, you cannot launch it directly.
+		
+		\item[armish-fireplace] \hfill \\
+		For command line arguments, see the readme.md file in the directory for armish-fireplace.
+		
+		\item[eldispacho] \hfill \\
+		For command line arguments, see the readme.md file in the directory for eldispacho.
+		
+		\item[sabot] \hfill \\
+		For command line arguments, see the readme.md file in the directory for Sabot.
+		
+		\end{description}
+ - Runtime behavior
+\chapter{Known Issues}
+\chapter{References}
+
+\end{document}

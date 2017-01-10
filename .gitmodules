@@ -1,0 +1,12 @@
+[submodule "component/armish-fireplace"]
+	path = component/armish-fireplace
+	url = https://github.com/ornl-qci/armish-fireplace.git
+[submodule "component/sabot"]
+	path = component/sabot
+	url = https://github.com/ornl-qci/sabot.git
+[submodule "component/eldispacho"]
+	path = component/eldispacho
+	url = https://github.com/ornl-qci/eldispacho.git
+[submodule "component/ovs"]
+	path = component/ovs
+	url = https://github.com/ornl-qci/ovs.git
