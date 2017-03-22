@@ -2,7 +2,11 @@
 ## Examples
 ### 3 Host
 
-This example shows a basic 3 host network with each host connected to a quantum circulator switch. Although basic, this configuration permits transmission and reception between any host. The simulation is currently configured to transmit a long string of text from Alice to Bob, but this may be altered if desired. To run the example, simply run the app.py using python:
+This example shows a basic 3 host network with each host connected to a quantum circulator switch. Although basic, this configuration permits transmission and reception between any host. The simulation is currently configured to transmit a long string of text from Alice to Bob, but this may be altered if desired.
+
+Before running the example, you must load the Open vSwitch kernel module and launch the switch. Please refer to the proper documentation on information on how to do this. It's important to note that the Open vSwitch instance must be closed and relaunched after each example run, otherwise existing quantum flows may interfere with new ones.
+
+To run the example, simply run the app.py using python:
 ```
 # python app.py
 ```
@@ -21,9 +25,11 @@ $ python lib/a_qim_client.py
 ```
 As soon as you enter Alice's command, you should begin to see text output in Bob's terminal. This text has been transmitted through a simulated quantum channel using superdense coding. Since there is no noise model present, the transmission is perfect.
 
+
+
 #### Files
 ##### `app.py`
-Excluding Open vSwitch, this script is what launches the interactable simulation. The network topology file is parsed and passed into the network simulator. The software for each host is launched within their own namespace, and by using IPC through the /tmp location, quantum simulation traffic is routed without traversing and impacting the simulated network.
+Excluding Open vSwitch, this script is what launches the interactable simulation. The network topology file is parsed and passed into the network simulator. The software for each host is launched within their own namespace, and by using IPC through the /tmp location, quantum simulation traffic is routed without traversing and impacting the simulated network. The script also installs specific quantum flows to the switch, allowing circuit switched quantum network traffic.
 
 ##### `3host.json`
 A JSON representation of the network topology.
