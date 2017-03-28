@@ -75,7 +75,7 @@ def get_switch_af_string(endpoint, AFrx, AFtx, txDispatcherEndpoint):
           '-u', puParams]
     
     if debugArmishFireplace:
-        af.insert(0, '--log-file= {}-{} {}'.format(debugArmishFireplaceFile,
+        af.insert(0, '--log-file={}-{} {}'.format(debugArmishFireplaceFile,
                                                    endpoint,
                                                    debugArmishFireplaceExtra))
         af.insert(0, 'valgrind')
