@@ -1,0 +1,39 @@
+loading app /home/annie/ryu/ryu/app/simple_switch_14.py
+loading app ryu.controller.ofp_handler
+instantiating app /home/annie/ryu/ryu/app/simple_switch_14.py of SimpleSwitch14
+instantiating app ryu.controller.ofp_handler of OFPHandler
+unsupported version 0x4. If possible, set the switch to use one of the versions [5]
+packet in 42307603176259 3a:9b:5a:5e:32:47 33:33:ff:5e:32:47 1
+packet in 42307603176259 aa:28:7d:9d:78:ee 33:33:00:00:00:16 3
+packet in 42307603176259 3a:9b:5a:5e:32:47 33:33:00:00:00:16 1
+packet in 42307603176259 aa:28:7d:9d:78:ee 33:33:ff:9d:78:ee 3
+packet in 42307603176259 f6:6d:d1:0b:88:ad 33:33:00:00:00:16 4
+packet in 42307603176259 aa:2f:63:d5:b3:5f 33:33:ff:d5:b3:5f 2
+packet in 42307603176259 aa:2f:63:d5:b3:5f 33:33:00:00:00:16 2
+packet in 42307603176259 f6:6d:d1:0b:88:ad 33:33:ff:0b:88:ad 4
+packet in 42307603176259 3a:9b:5a:5e:32:47 33:33:00:00:00:16 1
+packet in 42307603176259 3a:9b:5a:5e:32:47 33:33:00:00:00:02 1
+packet in 42307603176259 aa:28:7d:9d:78:ee 33:33:00:00:00:16 3
+packet in 42307603176259 aa:28:7d:9d:78:ee 33:33:00:00:00:02 3
+packet in 42307603176259 3a:9b:5a:5e:32:47 33:33:00:00:00:16 1
+packet in 42307603176259 aa:2f:63:d5:b3:5f 33:33:00:00:00:16 2
+packet in 42307603176259 aa:2f:63:d5:b3:5f 33:33:00:00:00:02 2
+packet in 42307603176259 aa:28:7d:9d:78:ee 33:33:00:00:00:16 3
+packet in 42307603176259 aa:2f:63:d5:b3:5f 33:33:00:00:00:16 2
+packet in 42307603176259 f6:6d:d1:0b:88:ad 33:33:00:00:00:16 4
+packet in 42307603176259 f6:6d:d1:0b:88:ad 33:33:00:00:00:02 4
+packet in 42307603176259 aa:2f:63:d5:b3:5f ff:ff:ff:ff:ff:ff 2
+packet in 42307603176259 aa:28:7d:9d:78:ee aa:2f:63:d5:b3:5f 3
+packet in 42307603176259 aa:2f:63:d5:b3:5f aa:28:7d:9d:78:ee 2
+packet in 42307603176259 f6:6d:d1:0b:88:ad 33:33:00:00:00:16 4
+packet in 42307603176259 aa:28:7d:9d:78:ee ff:ff:ff:ff:ff:ff 3
+packet in 42307603176259 f6:6d:d1:0b:88:ad aa:28:7d:9d:78:ee 4
+packet in 42307603176259 aa:28:7d:9d:78:ee f6:6d:d1:0b:88:ad 3
+packet in 42307603176259 3a:9b:5a:5e:32:47 33:33:00:00:00:02 1
+packet in 42307603176259 aa:28:7d:9d:78:ee 33:33:00:00:00:02 3
+packet in 42307603176259 aa:2f:63:d5:b3:5f 33:33:00:00:00:02 2
+packet in 42307603176259 f6:6d:d1:0b:88:ad 33:33:00:00:00:02 4
+packet in 42307603176259 3a:9b:5a:5e:32:47 33:33:00:00:00:02 1
+packet in 42307603176259 aa:28:7d:9d:78:ee 33:33:00:00:00:02 3
+packet in 42307603176259 aa:2f:63:d5:b3:5f 33:33:00:00:00:02 2
+packet in 42307603176259 f6:6d:d1:0b:88:ad 33:33:00:00:00:02 4

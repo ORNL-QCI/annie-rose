@@ -1,0 +1,34 @@
+{
+	"hosts" : [
+		{
+			"name" : "alice"
+		},
+		{
+			"name" : "bob"
+		},
+		{
+			"name" : "charlie"
+		}
+	],
+	"switches" : [
+		{
+			"name" : "s0",
+			"model" : "circulator_switch",
+			"connections" : ["alice", "bob", "charlie"]
+		}
+	],
+	"connections" : [
+		{
+			"endpointA" : "alice",
+			"endpointB" : "s0"
+		},
+		{
+			"endpointA" : "bob",
+			"endpointB" : "s0"
+		},
+		{
+			"endpointA" : "charlie",
+			"endpointB" : "s0"
+		}
+	]
+}
