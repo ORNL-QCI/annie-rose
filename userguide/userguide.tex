@@ -6,8 +6,14 @@
 \usepackage{titlesec} % Used to customize chapters, sections, and subsections
 \usepackage{scrpage2} % Used for page header/footers
 \usepackage{hyperref} % Used for urls
+\usepackage{listings}
+\usepackage{xcolor}
 
-\newcommand{\code}[1]{\texttt{#1}}
+\lstset{
+    frame=single,
+    breaklines=true,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}
+}
 
 \pagestyle{scrheadings}
 \addtokomafont{pagenumber}{\oldstylenums}
@@ -24,25 +30,20 @@
 \tableofcontents
 
 \chapter{Preface}
-
 This project aims to provide a platform to simulate heterogeneous computer networks comprised of classical and quantum communication channels. The guiding design principles include software-defined communication using near-real time processing of streaming data, separation of concerns into different networking layers, in addition to object oriented software layers.
 
 After reading this guide you will be familiar with the overall architecture of the network simulator, be able to run basic simulations, and make basic modifications to simulations.
 
 \chapter{Authors and Acknowledgments}
-
 \begin{tabular}{ l l }
 	Travis Humble & humblets@ornl.gov \\
 	Ronald Sadlier & sadlierrj@ornl.gov \\
 	Ryan Prout & proutrc@ornl.gov
 \end{tabular}
 
-%The authors would like to acknowledge 
-
 The numerical simulator implements a modified CHP which was originally written  by Scott Aarsonson. Visit \url{www.scottaaronson.com/chp} for more information.
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Component Overview}
-
 	\begin{description}
 		\item[mininet] \hfill \\
 		We use \href{www.mininet.org}{mininet} to create virtual networks consisting of nodes and switches.
@@ -64,31 +65,35 @@ The numerical simulator implements a modified CHP which was originally written  
 		
 		\item[Open vSwitch] \hfill \\
 		Open vSwitch is a popular open-source software defined networking switch. We've extended it to communicate and configure our simulated quantum switch. Our extensions don't affect the compilation or installation procedure.
-		
 	\end{description}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Installation}
-	\section{Platforms}
-	
-	All code is written to be run on x$86\_64$ processors, in particular Intel 64. AMD64 has not been tested thoroughly, although some testing of software components on ARMv7-a hardware has yielded positive results.
-	
 	\section{Environment}
-
-		Our environment consists of a standard mainstream Linux distribution with a Bash shell and the proper dependencies installed, along with minor configuration tweaks.
-
+		Our environment consists of a standard mainstream Linux distribution with a Bash shell and the proper dependencies installed, along with minor configuration tweaks. Basic dependencies are Boost and ZMQ. The build process will not proceed if dependencies are not met.
+    
 	\section{Download}
- 		
  		We use Git to manage our source repositories, so to download the software is to clone our repositories onto your local machine. Simply clone the main repository with the --recursive flag:
  		
- 		\code{
- 		\$ git clone https://github.com/ornl-qci/annie-rose.git --recursive
- 		}
- 
+ 		\begin{lstlisting}[language=bash]
+$ git clone https://github.com/ornl-qci/annie-rose.git --recursive
+ 		\end{lstlisting}
+ 		
+ 		Follow the typical CMake build process:
+ 		
+ 		\begin{lstlisting}[language=bash]
+$ mkdir build
+$ cd build
+$ cmake ../
+$ make
+$ sudo make install
+ 		\end{lstlisting}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Usage Examples}
  	\section{Launching Example Network}
  		See examples/3host for an example of a 3 host quantum network. See the README file within the directory for information on launching.
- 	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Known Issues}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{References}
 
 \end{document}
